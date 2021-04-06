@@ -43,22 +43,22 @@ function AuthorizeButtons() {
   return (
     <Box p={2} display="flex" justifyContent="left">
       <Button
-          type="submit"
-          variant="contained"
-          color="primary"
+        type="submit"
+        variant="contained"
+        color="primary"
         className="brand-submit-button"
         style={style}
-        >
+      >
         Authorize
         </Button>
       <Button
-          type="button"
+        type="button"
         className="brand-text-color"
         style={style2}
-        >
+      >
         Skip for Later
         </Button>
-      
+
     </Box>
   );
 }
@@ -117,46 +117,45 @@ function Dashboard(props) {
 
       <Wrapper>
         <Grid container spacing={6} justify="center">
-        <Grid item xs={12} lg={12} xl={12}>
-          <Typography variant="h2" align="center" gutterBottom display="block">
-            Select Utility
+          <Grid item xs={12} lg={12} xl={12}>
+            <Typography variant="h2" align="center" gutterBottom display="block">
+              Select Utility
           </Typography>
-          <Typography variant="body1" align="center" gutterBottom display="block">
-            Select your utility provider
+            <Typography variant="body1" align="center" gutterBottom display="block">
+              Select your utility provider
           </Typography>
 
-          <Autocomplete
+            <Autocomplete
               id="combo-box-demo"
               multiple
               options={pgeList}
-              renderTags={options => 
-              {
+              renderTags={options => {
                 options.length > 1 && options.shift();
                 return (options.map((option, index) =>
-                  <React.Fragment key={ index }><span><CheckCircleIcon style={{ color: '#00D73F', marginRight: '8px'}}/> </span>{option.title}</React.Fragment>))
+                  <React.Fragment key={index}><span><CheckCircleIcon style={{ color: '#00D73F', marginRight: '8px' }} /> </span>{option.title}</React.Fragment>))
               }}
-              
+
               renderOption={option => {
-                  return (
-                      <React.Fragment><span><CheckCircleIcon style={{color: '#00D73F', marginRight: '8px'}}/> </span>{option.title}</React.Fragment>
-                  );
+                return (
+                  <React.Fragment><span><CheckCircleIcon style={{ color: '#00D73F', marginRight: '8px' }} /> </span>{option.title}</React.Fragment>
+                );
               }}
               getOptionLabel={(option) => option.title}
-            style={{ marginTop: '20px', marginBottom: '30px' }}
-            renderInput={(params) => <TextField {...params} />}
-          />
+              style={{ marginTop: '20px', marginBottom: '30px' }}
+              renderInput={(params) => <TextField {...params} />}
+            />
 
-          <ButtonLogo />
-          <TableOfContents />
-          <AuthorizeButtons />
+            <ButtonLogo />
+            <TableOfContents />
+            <AuthorizeButtons />
 
-            <Typography variant="body1" display="block" style={{ marginTop: '20px', fontSize: '8px', width: '60%'}}>
-            By click Authorize, Leap, our 3rd party provider, will connect to your utility company meter and enable Outwatt to support the grid.
+            <Typography variant="body1" display="block" style={{ marginTop: '20px', fontSize: '8px', width: '60%' }}>
+              By click Authorize, Leap, our 3rd party provider, will connect to your utility company meter and enable Outwatt to support the grid.
           </Typography>
 
+          </Grid>
         </Grid>
-      </Grid>
-        </Wrapper>
+      </Wrapper>
     </React.Fragment>
   );
 }
