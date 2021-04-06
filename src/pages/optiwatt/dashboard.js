@@ -3,17 +3,17 @@ import styled from "styled-components/macro";
 import Button from '@material-ui/core/Button';
 import { ReactComponent as OptiwattLogo } from "../../vendor/optiwatt.svg";
 import { Helmet } from "react-helmet-async";
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@material-ui/core/TextField';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 import {
   Box,
-  Divider as MuiDivider,
   Grid,
   Typography as MuiTypography,
 } from "@material-ui/core";
 
 import { spacing } from "@material-ui/system";
-
-const Divider = styled(MuiDivider)(spacing);
 
 const Typography = styled(MuiTypography)(spacing);
 
@@ -104,6 +104,12 @@ const Wrapper = styled.div`
   border-radius: 8px;
 `;
 
+const pgeList = [
+  { id: 1, title: 'SDG&E' },
+  { id: 2, title: 'SF PG&E' },
+  { id: 3, title: 'Los Angeles PG&E' },
+]
+
 function Dashboard(props) {
   return (
     <React.Fragment>
@@ -115,17 +121,36 @@ function Dashboard(props) {
           <Typography variant="h2" align="center" gutterBottom display="block">
             Select Utility
           </Typography>
-          <Typography variant="p" align="center" gutterBottom display="block">
+          <Typography variant="body1" align="center" gutterBottom display="block">
             Select your utility provider
           </Typography>
 
-          <Divider my={6} />
+          <Autocomplete
+              id="combo-box-demo"
+              multiple
+              options={pgeList}
+              renderTags={options => 
+              {
+                options.length > 1 && options.shift();
+                return (options.map((option, index) =>
+                  <React.Fragment key={ index }><span><CheckCircleIcon style={{ color: '#00D73F', marginRight: '8px'}}/> </span>{option.title}</React.Fragment>))
+              }}
+              
+              renderOption={option => {
+                  return (
+                      <React.Fragment><span><CheckCircleIcon style={{color: '#00D73F', marginRight: '8px'}}/> </span>{option.title}</React.Fragment>
+                  );
+              }}
+              getOptionLabel={(option) => option.title}
+            style={{ marginTop: '20px', marginBottom: '30px' }}
+            renderInput={(params) => <TextField {...params} />}
+          />
 
           <ButtonLogo />
           <TableOfContents />
           <AuthorizeButtons />
 
-            <Typography variant="p" display="block" style={{ marginTop: '20px', fontSize: '8px', width: '60%'}}>
+            <Typography variant="body1" display="block" style={{ marginTop: '20px', fontSize: '8px', width: '60%'}}>
             By click Authorize, Leap, our 3rd party provider, will connect to your utility company meter and enable Outwatt to support the grid.
           </Typography>
 
